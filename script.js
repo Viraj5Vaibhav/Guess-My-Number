@@ -9,7 +9,7 @@ document.querySelector('.check').addEventListener('click', function () {
   if (Number(document.querySelector('.guess').value) == secretNumber) {
     document.querySelector('body').style.backgroundColor = '#06b347'; //Green
     document.querySelector('.number').style.width = '30rem'; //Size 30
-    document.querySelector('.message').textContent = '🎉Correct Number'; //Message update
+    updateMessage('🎉Correct Number'); //Message update
     document.querySelector('.number').textContent = secretNumber;
     //highest score: Check if the highest score is less than current score and set the max value as highest score
     document.querySelector('.highscore').textContent =
@@ -20,23 +20,14 @@ document.querySelector('.check').addEventListener('click', function () {
   }
   //If the number is to high
   else if (Number(document.querySelector('.guess').value) > secretNumber) {
-    document.querySelector('.message').textContent = '📈 Too High!';
-    document.querySelector('body').style.backgroundColor = 'orange';
-    if (Number(document.querySelector('.score').textContent > 0))
-      document.querySelector('.score').textContent =
-        Number(document.querySelector('.score').textContent) - 1;
+    result('📈 Too High!');
   } else {
     //If the number is too low
-    document.querySelector('.message').textContent = '📉 Too Low';
-    document.querySelector('body').style.backgroundColor = 'orange';
-    if (Number(document.querySelector('.score').textContent > 0))
-      document.querySelector('.score').textContent =
-        Number(document.querySelector('.score').textContent) - 1;
+    result('📉 Too Low');
   }
 
   if (Number(document.querySelector('.score').textContent == 0)) {
-    document.querySelector('.message').textContent =
-      'Game Lost, please try again!';
+    updateMessage('Game Lost, please try again!');
     document.querySelector('body').style.backgroundColor = 'red';
   }
 });
@@ -58,8 +49,20 @@ document.querySelector('.hard').addEventListener('click', function () {
 
 function reset() {
   document.querySelector('.guess').value = '';
-  document.querySelector('.message').textContent = 'Start guessing...';
+  updateMessage('Start guessing...');
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
   document.querySelector('.number').textContent = '?';
+}
+
+function result(message) {
+  document.querySelector('.message').textContent = message;
+  document.querySelector('body').style.backgroundColor = 'orange';
+  if (Number(document.querySelector('.score').textContent > 0))
+    document.querySelector('.score').textContent =
+      Number(document.querySelector('.score').textContent) - 1;
+}
+
+function updateMessage(message) {
+  document.querySelector('.message').textContent = message;
 }
