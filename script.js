@@ -44,10 +44,22 @@ document.querySelector('.check').addEventListener('click', function () {
 //Again/reset button event listener
 document.querySelector('.again').addEventListener('click', function () {
   secretNumber = Math.floor(Math.random() * 20 + 1);
-  document.querySelector('.guess').value = '';
+  document.querySelector('.between').textContent = '(Between 1 and 20)';
+  reset();
   document.querySelector('.score').textContent = 20;
+});
+
+document.querySelector('.hard').addEventListener('click', function () {
+  secretNumber = Math.floor(Math.random() * 50 + 1);
+  document.querySelector('.between').textContent = '(Between 1 and 50)';
+  reset();
+  document.querySelector('.score').textContent = 10;
+});
+
+function reset() {
+  document.querySelector('.guess').value = '';
   document.querySelector('.message').textContent = 'Start guessing...';
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
   document.querySelector('.number').textContent = '?';
-});
+}
